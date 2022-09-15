@@ -1,11 +1,11 @@
 import api from '../api'
 
-export default async function buscarRepositorio() {
+export default async function buscarRepositorio(id) {
   try {
-    const resultado = await api.get(`/repos?postId=`)
-    return resultado.data[0]
+    const resultado = await api.get(`/repos?postId=${id}`)
+    return resultado.data
   } catch (error) {
     console.log(error)
-    return {}
+    return []
   }
 }
