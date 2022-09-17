@@ -1,12 +1,12 @@
 import api from '../api'
 
-export default async function criarRepositorio(postId, nome, data, id) {
+export default async function criarRepositorio(postId, nome, data) {
   try {
-    await api.put(`/repos/`, {
+    await api.post(`/repos/`, {
       name: nome,
       data: data,
       postId: postId,
-      id: id
+
     })
     return 'Sucesso!'
   } catch (error) {

@@ -7,7 +7,7 @@ import { useIsFocused } from '@react-navigation/native'
 
 export default function Repositorios({ route, navigation }) {
   const [repo, setRepo] = useState([])
-  
+
   //esta hook do navigation faz com que a tela carregue e atualize
   const estaNaTela = useIsFocused()
 
@@ -40,7 +40,9 @@ export default function Repositorios({ route, navigation }) {
       />
       <TouchableOpacity
         style={estilos.botao}
-        onPress={() => navigation.navigate('CriarRepositorio')}
+        onPress={() =>
+          navigation.navigate('CriarRepositorio', { id: route.params.id })
+        }
       >
         <Text style={estilos.textoBotao}>Adicionar novo repositório</Text>
       </TouchableOpacity>

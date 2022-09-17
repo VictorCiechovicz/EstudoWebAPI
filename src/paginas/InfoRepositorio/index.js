@@ -5,6 +5,7 @@ import estilos from './estilos'
 
 import salvarRepositorio from '../../services/requisicoes/salvaRepositorio'
 import { NavigationHelpersContext } from '@react-navigation/native'
+import deletarRepositorio from '../../services/requisicoes/deletarRepositorio'
 
 export default function InfoRepositorio({ route, navigation }) {
   const [nome, setNome] = useState(route.params.item.name)
@@ -23,6 +24,17 @@ export default function InfoRepositorio({ route, navigation }) {
       navigation.goBack()
     } else {
       Alert.alert('Erro ao atualizar repositorio')
+    }
+  }
+
+  async function deletar() {
+    const resultado = await deletarRepositorio(route.params.item.id)
+
+    if (resultado === 'Sucesso!') {
+      Alert.alert('Repositorio Deletado!')
+      navigation.goBack()
+    } else {
+      Alert.alert('Erro ao deletar repositorio')
     }
   }
 
@@ -46,6 +58,7 @@ export default function InfoRepositorio({ route, navigation }) {
         <Text style={estilos.textoBotao}>Salvar</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={deletar}
         style={[estilos.botao, { backgroundColor: '#DD2B2B', marginTop: 10 }]}
       >
         <Text style={estilos.textoBotao}>Deletar</Text>

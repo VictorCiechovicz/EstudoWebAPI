@@ -8,14 +8,9 @@ export default function CriarRepositorio({ route, navigation }) {
   const [data, setData] = useState('')
 
   async function criar() {
-    const resultado = await criarRepositorio(
-      route.params.item.postId,
-      nome,
-      data,
-      route.params.item.id
-    )
+    const resultado = await criarRepositorio(route.params.id, nome, data)
     if (resultado === 'Sucesso!') {
-      Alert.alert('Repositorio atualizado')
+      Alert.alert('Repositorio criado')
       navigation.goBack()
     } else {
       Alert.alert('Erro ao atualizar repositorio')
