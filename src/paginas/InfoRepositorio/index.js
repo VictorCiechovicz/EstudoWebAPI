@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, TextInput, Alert } from 'react-native'
 
 import estilos from './estilos'
 
-import {salvarRepositorio} from '../../services/requisicoes/repositorios'
+import salvarRepositorio from '../../services/requisicoes/salvaRepositorio'
 import { NavigationHelpersContext } from '@react-navigation/native'
 
 export default function InfoRepositorio({ route, navigation }) {

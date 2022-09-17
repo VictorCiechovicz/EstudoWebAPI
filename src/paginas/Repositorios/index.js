@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { Text, View, FlatList, TouchableOpacity } from 'react-native'
 import estilos from './estilos'
 
-import buscarRepositorio from '../../services/requisicoes/repositorios'
+import buscarRepositorio from '../../services/requisicoes/buscaRepositorios'
+import { useIsFocused } from '@react-navigation/native'
 
 export default function Repositorios({ route, navigation }) {
   const [repo, setRepo] = useState([])
+  
+  //esta hook do navigation faz com que a tela carregue e atualize
+  const estaNaTela = useIsFocused()
 
   //o useEffect é utilizado toda vez que entra na tela
   useEffect(async () => {
     const resultado = await buscarRepositorio(route.params.id)
     setRepo(resultado)
-  }, [])
+  }, [estaNaTela])
 
   return (
     <View style={estilos.container}>
@@ -25,9 +29,7 @@ export default function Repositorios({ route, navigation }) {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={estilos.repositorio}
-            onPress={() =>
-              navigation.navigate('InfoRepositorio', { item })
-            }
+            onPress={() => navigation.navigate('InfoRepositorio', { item })}
           >
             <Text style={estilos.repositorioNome}>{item.name}</Text>
             <Text style={estilos.repositorioData}>
